@@ -7,7 +7,9 @@ import TextInput from '@/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 
 const form = useForm({
-    name: '',
+    lastname: '',
+    firstname: '',
+    address: '',
     email: '',
     password: '',
     password_confirmation: '',
@@ -26,20 +28,51 @@ const submit = () => {
 
         <form @submit.prevent="submit">
             <div>
-                <InputLabel for="name" value="Nom" />
+                <InputLabel for="lastname" value="Nom" />
 
                 <TextInput
-                    id="name"
+                    id="lastname"
                     type="text"
                     class="mt-1 block w-full"
-                    v-model="form.name"
+                    v-model="form.lastname"
                     required
                     autofocus
-                    autocomplete="name"
+                    autocomplete="lastname"
                 />
 
-                <InputError class="mt-2" :message="form.errors.name" />
+                <InputError class="mt-2" :message="form.errors.lastname" />
             </div>
+
+            <div class="mt-4">
+                <InputLabel for="firstname" value="Prénom" />
+
+                <TextInput
+                    id="firstname"
+                    type="text"
+                    class="mt-1 block w-full"
+                    v-model="form.firstname"
+                    required
+                    autocomplete="firstname"
+                />
+
+                <InputError class="mt-2" :message="form.errors.firstname" />
+            </div>
+
+            <div class="mt-4">
+                <InputLabel for="address" value="Adresse" />
+
+                <TextInput
+                    id="address"
+                    type="text"
+                    class="mt-1 block w-full"
+                    v-model="form.address"
+                    required
+                    autocomplete="address"
+                />
+
+                <InputError class="mt-2" :message="form.errors.address" />
+            </div>
+
 
             <div class="mt-4">
                 <InputLabel for="email" value="Email" />
