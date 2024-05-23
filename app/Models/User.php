@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -45,5 +46,24 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    // Définition de la relation entre les utilisateurs et les commandes
+    // On utilise HasMany pour dire qu'un utilisateur (User) peut avoir plusieurs commandes (Order)
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    // Un utilisateurs peut avoir plusieurs produits
+    public function products(): HasMany
+    {
+        return $this->hasMany(Product::class);
+    }
+
+    // Un utilisateurs peut valider plusieurs produits
+    public function validatedProducts(): HasMany
+    {
+        return $this->hasMany(Product::class, 'validated_by');
     }
 }
