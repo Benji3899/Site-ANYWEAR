@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('brand');
             $table->string('first_img');
             $table->string('second_img');
-            $table->foreignId('type_id')->constrained('product_types');
+            $table->enum('type', ['rental', 'swap']);
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('validated_by')->nullable()->constrained('users');
             $table->timestamps();

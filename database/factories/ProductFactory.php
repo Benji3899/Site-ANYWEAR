@@ -29,7 +29,7 @@ class ProductFactory extends Factory
             'brand' => $this->faker->company,
             'first_img' => $this->faker->imageUrl,
             'second_img' => $this->faker->imageUrl,
-            'type_id' => ProductType::factory(),
+            'type' => $this->faker->word,
             'user_id' => User::factory(),
             'validated_by' => null, // Default to null
         ];
