@@ -4,11 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProductRequest;
 use App\Models\Product;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
+/**
+ * @method authorize(string $string, Product $product)
+ */
 class ProductController extends Controller
 {
+    use AuthorizesRequests;
     /**
      * Affiche la liste des produits.
      */
@@ -68,20 +73,44 @@ class ProductController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Affiche le formulaire d'édition pour un produit spécifique.
      */
-    public function edit(string $id)
+    public function edit(Product $product)
     {
-        //
+        // Vérifie les permissions
+        $this->authorize('update', $product);
+        return Inertia::render('Products/Edit', ['product' => $product]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(StoreProductRequest $request, Product $product)
     {
-        //
+        // Vérifie les permissions
+        $this->authorize('update', $product);
+
+        // Mise à jour des fichiers d'images si nécessaires
+        if ($request->hasFile('first_img')) {
+            $firstImage = $request->file('first_img');
+            $pathFirstImage = $firstImage->store('', 'products');
+            $firstImageFileName = basename($pathFirstImage);
+            $product->first_img = $firstImageFileName;
+        }
+
+        if ($request->hasFile('second_img')) {
+            $secondImage = $request->file('second_img');
+            $pathSecondImage = $secondImage->store('', 'products');
+            $secondImageFileName = basename($pathSecondImage);
+            $product->second_img = $secondImageFileName;
+        }
+
+        // Mise à jour du produit avec les données validées
+        $product->update($request->only(['name', 'description', 'size', 'brand', 'type', 'category']));
+
+        return redirect()->route('products.index');
     }
+
 
     /**
      * Remove the specified resource from storage.

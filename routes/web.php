@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Models\Product;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -17,7 +18,11 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    // Récupérer les produits de l'utilisateur connecté
+    $products = Product::where('user_id', auth()->id())->get();
+    return Inertia::render('Dashboard', [
+        'products' => $products,
+    ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 // route test factories

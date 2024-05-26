@@ -37,7 +37,8 @@ class ProductPolicy
      */
     public function update(User $user, Product $product): bool
     {
-        //
+        // L'utilisateur peut mettre à jour le produit s'il en est le propriétaire
+        return $user->id === $product->user_id;
     }
 
     /**

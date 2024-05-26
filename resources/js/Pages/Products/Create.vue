@@ -1,33 +1,74 @@
 <template>
-    <Head title="Créer un produit" />
+    <Head title="Créer un produit"/>
 
     <AuthenticatedLayout>
-        <!-- @submit.prevent pour annuler le comportement par défaut   -->
-        <form @submit.prevent="onSubmitForm">
-            <p>Ajouter un produit</p>
-            <p>Nom: <input type="text" required v-model="form.name"></p>
-            <p>Description <input type="text" required v-model="form.description"></p> <!-- voir nombre ligne max-->
-            <p>Taille: <input type="text" v-model="form.size"></p>
-            <p>Marque: <input type="text" required v-model="form.brand"></p>
-            <p>Image 1: <input type="file" accept="image/jpeg, image/png" required v-on:change="onFirstImageChanged"></p>
-            <p>Image 2: <input type="file" accept="image/jpeg, image/png" required v-on:change="onSecondImageChanged"></p>
-            <p>Type:
-                <select name="" id="" v-model="form.type" required>
-                    <option value="rental">Location</option>
-                    <option value="swap">Troque</option>
-                </select>
-            </p>
-            <p>Catégorie:
-                <select name="" id="" v-model="form.category" required>
-                    <option value="sac">Sac</option>
-                    <option value="robe">Robe</option>
-                    <option value="pantalon">Pantalon</option>
-                    <option value="smoking">Smoking</option>
-                    <option value="jupe">Jupe</option>
-                </select>
-            </p>
-            <button type="submit">Ajouter le produit</button>
-        </form>
+        <div class="py-12">
+            <h2 class="font-semibold text-lg mb-6 text-center">Ajouter un produit</h2>
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <!-- @submit.prevent pour annuler le comportement par défaut   -->
+                <form @submit.prevent="onSubmitForm" class="max-w-lg mx-auto">
+                    <div class="grid grid-cols-1 gap-6">
+                        <label for="name" class="block">
+                            <span>Nom</span>
+                            <input type="text" required v-model="form.name"
+                                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:ring-opacity-50">
+                        </label>
+                        <label for="size" class="block">
+                            <span>Taille</span>
+                            <input type="text" v-model="form.size"
+                                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:ring-opacity-50">
+                        </label>
+
+                        <label for="description" class="block">
+                            <span>Description</span>
+                            <input type="text" required v-model="form.description"
+                                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:ring-opacity-50">
+                        </label>
+                        <label for="brand" class="block">
+                            <span>Marque</span>
+                            <input type="text" required v-model="form.brand"
+                                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:ring-opacity-50">
+                        </label>
+
+                        <label for="image_1" class="block">
+                            <span>Image 1</span>
+                            <input type="file" accept="image/jpeg, image/png" required v-on:change="onFirstImageChanged"
+                                   class="mt-1 block w-full border-gray-300 focus:ring-blue-500 focus:ring-opacity-50">
+                        </label>
+
+                        <label for="image_2" class="block">
+                            <span>Image 2</span>
+                            <input type="file" accept="image/jpeg, image/png" required
+                                   v-on:change="onSecondImageChanged"
+                                   class="mt-1 block w-full border-gray-300 focus:ring-blue-500 focus:ring-opacity-50">
+                        </label>
+
+                        <label for="type" class="block">
+                            <span>Type</span>
+                            <select name="" id="" v-model="form.type" required
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:ring-opacity-50">
+                                <option value="rental">Location</option>
+                                <option value="swap">Troque</option>
+                            </select>
+                        </label>
+                        <label for="category" class="block">
+                            <span>Catégorie</span>
+                            <select name="" id="" v-model="form.category" required
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:ring-opacity-50">
+                                <option value="sac">Sac</option>
+                                <option value="robe">Robe</option>
+                                <option value="pantalon">Pantalon</option>
+                                <option value="smoking">Smoking</option>
+                                <option value="jupe">Jupe</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="mt-8 flex justify-center">
+                    <button type="submit" class="px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white font-semibold rounded-md">Ajouter le produit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </AuthenticatedLayout>
 </template>
 
@@ -54,12 +95,12 @@ function onSubmitForm() {
 
 // Fonction pour gérer le changement de la première image
 function onFirstImageChanged(event) {
-    form.first_img=event.target.files[0];
+    form.first_img = event.target.files[0];
 }
 
 // Fonction pour gérer le changement de la deuxième image
 function onSecondImageChanged(event) {
-    form.second_img=event.target.files[0];
+    form.second_img = event.target.files[0];
 }
 
 </script>
