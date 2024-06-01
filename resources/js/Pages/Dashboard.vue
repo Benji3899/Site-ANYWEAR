@@ -1,6 +1,8 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head, usePage } from '@inertiajs/vue3';
+import { Head, usePage} from '@inertiajs/vue3';
+import { InertiaLink } from '@inertiajs/inertia-vue3';
+
 
 const { props } = usePage();
 console.log('Props:', props);
@@ -23,12 +25,18 @@ console.log('Products:', products);
                                 <img :src="`/storage/products/${product.first_img}`" alt="Image 1" class="w-full h-auto">
                                 <h4 class="text-center m-6">{{ product.name }}</h4>
                                 <div class="flex justify-center space-x-4 mb-4">
-                                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Modifier</button>
-                                    <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Supprimer</button>
+                                    <InertiaLink :href="`/products/${product.id}/edit`" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Modifier</InertiaLink>
+<!--                                    <InertiaLink :href="`/products/${product.id}/destroy`" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Supprimer</InertiaLink>-->
+                                    <button @click="deleteProduct(product.id)" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Supprimer</button>
                                 </div>
                             </li>
                         </ul>
                         <p v-else>Aucun produit trouvé.</p>
+                    </div>
+                    <div>
+                        <InertiaLink href="/products/create" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            Ajouter un produit
+                        </InertiaLink>
                     </div>
                 </div>
             </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProductRequest;
 use App\Models\Product;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -21,8 +22,8 @@ class ProductController extends Controller
     public function index()
     {
         // servira peut-être plus tard pour afficher les produits de l'user connecté
-       /* $products = Product::where('user_id', auth()->id())->get();
-        return Inertia::render('Products/Index', ['products' => $products]);*/
+//        $products = Product::where('user_id', auth()->id())->get();
+//        return Inertia::render('Dashboard', ['products' => $products]);
     }
 
     /**
@@ -34,7 +35,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Enregistre un nouveau produit en base de données.
+     * Créer et enregistre un nouveau produit en base de données.
      */
     public function store(StoreProductRequest $request)
     {
@@ -52,6 +53,7 @@ class ProductController extends Controller
         Product::create([
             'name' => $request->get('name'),
             'description' => $request->get('description'),
+            'price' => $request->get('price'),
             'size' => $request->get('size'),
             'brand' => $request->get('brand'),
             'first_img' => $firstImageFileName,
@@ -67,13 +69,22 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+//    public function show(string $id)
+//    {
+//
+//    }
+
+    public function show(Product $product)
     {
-        //
+        return Inertia::render('Products/Show', [
+            'product' => $product,
+            'pageTitle' => 'Nom du produit: ' . $product->name,
+        ]);
     }
 
     /**
      * Affiche le formulaire d'édition pour un produit spécifique.
+     * @throws AuthorizationException
      */
     public function edit(Product $product)
     {
@@ -84,11 +95,25 @@ class ProductController extends Controller
 
     /**
      * Update the specified resource in storage.
+     * @throws AuthorizationException
      */
-    public function update(StoreProductRequest $request, Product $product)
+    public function update(StoreProductRequest $request, int $id)
     {
+        $product = Product::findOrFail($id);
         // Vérifie les permissions
         $this->authorize('update', $product);
+
+//        $validated = $request->validate([
+//            'name' => 'required',
+//            'description' => 'required',
+//            'price' => null,
+//            'size' => null,
+//            'brand' => 'required',
+//            'type' => 'required',
+//            'category' => 'required',
+//        ]);
+
+        $validated = $request->validated();
 
         // Mise à jour des fichiers d'images si nécessaires
         if ($request->hasFile('first_img')) {
@@ -105,10 +130,12 @@ class ProductController extends Controller
             $product->second_img = $secondImageFileName;
         }
 
-        // Mise à jour du produit avec les données validées
-        $product->update($request->only(['name', 'description', 'size', 'brand', 'type', 'category']));
+//        dd($validated, $product->first_img, $product->second_img, $product->save());
 
-        return redirect()->route('products.index');
+        // Mise à jour du produit avec les données validées
+        $product->update($validated);
+
+        return redirect()->route('dashboard');
     }
 
 

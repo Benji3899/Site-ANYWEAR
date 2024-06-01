@@ -1,5 +1,5 @@
 <template>
-    <Head title="Créer un produit"/>
+<!--    <Head title="Créer un produit"/>-->
 
     <AuthenticatedLayout>
         <div class="py-12">
@@ -24,6 +24,13 @@
                             <input type="text" required v-model="form.description"
                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:ring-opacity-50">
                         </label>
+
+                        <label for="price" class="block">
+                            <span>Prix</span>
+                            <input type="number" v-model="form.price"
+                                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:ring-opacity-50">
+                        </label>
+
                         <label for="brand" class="block">
                             <span>Marque</span>
                             <input type="text" required v-model="form.brand"
@@ -80,6 +87,7 @@ import {reactive} from "vue";
 const form = reactive({
     name: null,
     description: null,
+    price: null,
     size: null,
     brand: null,
     first_img: null,
@@ -90,7 +98,7 @@ const form = reactive({
 
 // Fonction pour soumettre le formulaire
 function onSubmitForm() {
-    router.post('/products', form)
+    router.post('/products', form);
 }
 
 // Fonction pour gérer le changement de la première image
@@ -102,7 +110,6 @@ function onFirstImageChanged(event) {
 function onSecondImageChanged(event) {
     form.second_img = event.target.files[0];
 }
-
 </script>
 
 <style scoped>

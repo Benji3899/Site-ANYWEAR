@@ -11,7 +11,7 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description', 'size', 'brand', 'first_img', 'second_img', 'type', 'category', 'user_id'];
+    protected $fillable = ['name', 'description', 'price', 'size', 'brand', 'first_img', 'second_img', 'type', 'category', 'user_id'];
 
     // Relation entre produits et utilisateurs
     // On utilise BelongsTo pour dire qu'un produit (Product) est associée à un utilisateur (User) unique
