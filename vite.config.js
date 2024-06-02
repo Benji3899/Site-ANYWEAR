@@ -17,4 +17,13 @@ export default defineConfig({
             },
         }),
     ],
+    build: {
+        manifest: true, // Générer un fichier manifest.json
+        outDir: 'public/build', // Répertoire de sortie pour les fichiers générés
+        rollupOptions: {
+            input: {
+                app: 'resources/js/app.js', // Point d'entrée principal
+            },
+        },
+    },
 });
