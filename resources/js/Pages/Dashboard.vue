@@ -11,7 +11,7 @@ console.log('Products:', products);
 </script>
 
 <template>
-    <Head title="Dashboard" />
+    <Head title="Dashboard" ><title>Tableau de bord</title></Head>
 
     <AuthenticatedLayout>
         <div class="py-12">

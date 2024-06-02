@@ -1,0 +1,17 @@
+@layer utilities {
+    .text_blue, .text_blue:hover{
+        color: #1A1934;
+    }
+
+    .bg_blue, .bg_blue:hover{
+        background-color: #1A1934;
+    }
+
+    .text_yellow, .text_yellow:hover{
+        color: #F0D34A;
+    }
+
+    .bg_yellow, .bg_yellow:hover{
+        background-color: #F0D34A;
+    }
+}

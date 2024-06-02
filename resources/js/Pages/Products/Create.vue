@@ -1,5 +1,5 @@
 <template>
-<!--    <Head title="Créer un produit"/>-->
+    <Head title="Ajouter un produit"><title>Ajouter un produit</title></Head>
 
     <AuthenticatedLayout>
         <div class="py-12">
