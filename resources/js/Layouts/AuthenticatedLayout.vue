@@ -1,6 +1,5 @@
 <script setup>
 import { ref } from 'vue';
-import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
@@ -32,7 +31,7 @@ const toggleUserDropdown = () => {
                             <!-- Logo -->
                             <div class="shrink-0 flex items-center">
                                 <Link :href="route('accueil')">
-                                    <img src="/storage/images/logo-anywear.png" width="40" alt="">
+                                    <img src="/images/logo-anywear.png" width="40" alt="">
                                 </Link>
                             </div>
 
@@ -97,7 +96,7 @@ const toggleUserDropdown = () => {
 
                             <div v-else>
                                 <NavLink :href="route('login')">
-                                    <img src="/storage/images/User.svg" width="40" alt="">
+                                    <img src="/images/User.svg" width="40" alt="">
                                 </NavLink>
                             </div>
                         </div>

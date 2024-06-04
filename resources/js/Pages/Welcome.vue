@@ -44,9 +44,9 @@ function handleImageError() {
             >
                 <div class="relative w-full p-0">
                     <header class="w-full h-screen bg-center bg-cover"
-                            style="background-image: url('/storage/images/hero-banner.jpg'); background-repeat: no-repeat">
+                            style="background-image: url('images/hero-banner.jpg'); background-repeat: no-repeat">
                         <div class="flex justify-center items-center h-full">
-                            <img class="object-scale-down bg-contain size-60 lg:size-96" src="/storage/images/logo-slogan.png"
+                            <img class="object-scale-down bg-contain size-60 lg:size-96" src="/images/logo-slogan.png"
                                  alt="Logo AnyWear et slogan: AnyWear, luxury pieces, anytime, anywhere">
                         </div>
                     </header>
@@ -99,7 +99,7 @@ function handleImageError() {
                             <div class="grid gap-6 lg:grid-cols-3 lg:gap-8 font-semibold text-white">
                                 <div class="relative text-center">
                                     <div class="w-full h-96 overflow-hidden relative">
-                                        <img class="rounded-lg w-full h-full object-cover" src="/storage/images/sac-et-montre600-400.jpg" alt="Catégorie sacs à main">
+                                        <img class="rounded-lg w-full h-full object-cover" src="/images/sac-et-montre600-400.jpg" alt="Catégorie sacs à main">
                                         <div class="rounded-lg absolute inset-0 bg-black opacity-15"></div>
                                     </div>
                                     <h3 class="absolute inset-0 flex items-center justify-center text-xl">Sacs à main</h3>
@@ -107,7 +107,7 @@ function handleImageError() {
 
                                 <div class="relative text-center">
                                     <div class="w-full h-96 overflow-hidden relative">
-                                        <img class="rounded-lg w-full h-full object-cover" src="/storage/images/categorie-robe600-400.jpg" alt="Catégorie robes">
+                                        <img class="rounded-lg w-full h-full object-cover" src="/images/categorie-robe600-400.jpg" alt="Catégorie robes">
                                         <div class="rounded-lg absolute inset-0 bg-black opacity-15"></div>
                                     </div>
                                     <h3 class="absolute inset-0 flex items-center justify-center text-xl">Robes</h3>
@@ -115,7 +115,7 @@ function handleImageError() {
 
                                 <div class="relative text-center">
                                     <div class="w-full h-96 overflow-hidden relative">
-                                        <img class="rounded-lg w-full h-full object-cover" src="/storage/images/categorie-smoking600-400.jpg" alt="Catégorie smokings">
+                                        <img class="rounded-lg w-full h-full object-cover" src="/images/categorie-smoking600-400.jpg" alt="Catégorie smokings">
                                         <div class="rounded-lg absolute inset-0 bg-black opacity-15"></div>
                                     </div>
                                     <h3 class="absolute inset-0 flex items-center justify-center text-xl">Smokings</h3>
@@ -148,7 +148,7 @@ function handleImageError() {
 
                                     <div class="relative text-center">
                                         <div class="w-full h-96 overflow-hidden relative">
-                                            <img class="rounded-lg w-full h-full object-cover" src="/storage/images/section-authenticite480-400.jpg" alt="information sur la certification des accessoires">
+                                            <img class="rounded-lg w-full h-full object-cover" src="/images/section-authenticite480-400.jpg" alt="information sur la certification des accessoires">
                                             <div class="rounded-lg absolute inset-0 bg-black opacity-15"></div>
                                         </div>
                                         <h3 class="absolute text-lg inset-0 flex items-center justify-center lg:text-xl">Certification</h3>
@@ -156,7 +156,7 @@ function handleImageError() {
 
                                     <div class="relative text-center">
                                         <div class="w-full h-96 overflow-hidden relative">
-                                            <img class="rounded-lg w-full h-full object-cover" src="/storage/images/section-assurance600-400.jpg" alt="information sur l'assurance des accessoires">
+                                            <img class="rounded-lg w-full h-full object-cover" src="/images/section-assurance600-400.jpg" alt="information sur l'assurance des accessoires">
                                             <div class="rounded-lg absolute inset-0 bg-black opacity-15"></div>
                                         </div>
                                         <h3 class="absolute text-lg inset-0 flex items-center justify-center lg:text-xl">Assurance</h3>
@@ -164,7 +164,7 @@ function handleImageError() {
 
                                     <div class="relative text-center">
                                         <div class="w-full h-96 overflow-hidden relative">
-                                            <img class="rounded-lg w-full h-full object-cover" src="/storage/images/section-livraison600-400.jpg" alt="information sur les livraisons des accessoires">
+                                            <img class="rounded-lg w-full h-full object-cover" src="/images/section-livraison600-400.jpg" alt="information sur les livraisons des accessoires">
                                             <div class="rounded-lg absolute inset-0 bg-black opacity-15"></div>
                                         </div>
                                         <h3 class="absolute text-lg inset-0 flex items-center justify-center lg:text-xl">Livraison</h3>
@@ -172,7 +172,7 @@ function handleImageError() {
 
                                     <div class="relative text-center">
                                         <div class="w-full h-96 overflow-hidden relative">
-                                            <img class="rounded-lg w-full h-full object-cover" src="/storage/images/section-nettoyage600-400.jpg" alt="information sur le nettoyage des vêtements avant location ou troque">
+                                            <img class="rounded-lg w-full h-full object-cover" src="/images/section-nettoyage600-400.jpg" alt="information sur le nettoyage des vêtements avant location ou troque">
                                             <div class="rounded-lg absolute inset-0 bg-black opacity-15"></div>
                                         </div>
                                         <h3 class="absolute text-lg inset-0 flex items-center justify-center lg:text-xl">Nettoyage</h3>
