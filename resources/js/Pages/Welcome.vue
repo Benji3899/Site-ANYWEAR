@@ -1,6 +1,7 @@
 <script setup>
 import {Head} from '@inertiajs/vue3';
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+import Footer from "@/Layouts/Footer.vue";
 
 defineProps({
     canLogin: {
@@ -125,13 +126,13 @@ function handleImageError() {
                         </div>
 
                         <!-- Section réassurance  -->
-                        <div class="bg_blue mb-20 w-full text-white">
+                        <div class="bg_blue w-full text-white">
                             <div class="w-10/12 lg:w-11/12 mx-auto py-16">
                                 <div class="text-center">
                                     <h2 class="text-3xl font-semibold lg:text-4xl">Nos services</h2>
                                 </div>
 
-                                <div class="grid gap-6 grid-cols-3 lg:gap-8 my-8 text-center">
+                                <div class="grid gap-6 grid-cols-3 lg:gap-8 my-12 text-center">
                                     <div>
                                         <h3><span class="text-2xl font-semibold">25</span><br>Marques</h3>
                                     </div>
@@ -183,9 +184,10 @@ function handleImageError() {
                     </main>
 
                     <!-- Footer  -->
-                    <footer class="py-16 text-center text-sm text-black">
-                        Laravel v{{ laravelVersion }} (PHP v{{ phpVersion }})
-                    </footer>
+                    <Footer/>
+<!--                    <footer class="py-16 text-center text-sm text-black">-->
+<!--                        Laravel v{{ laravelVersion }} (PHP v{{ phpVersion }})-->
+<!--                    </footer>-->
                 </div>
             </div>
         </div>
