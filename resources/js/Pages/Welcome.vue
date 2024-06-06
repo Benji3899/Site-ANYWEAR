@@ -75,7 +75,7 @@ function handleImageError() {
                                 </div>
 
                                 <div class="bg_blue p-10 rounded-lg">
-                                    <h3 class="text-xl font-semibold text-center lg:text-1xl lg:mb-8">Éstimation des pièces</h3>
+                                    <h3 class="text-xl font-semibold text-center lg:text-1xl lg:mb-8">Estimation des pièces</h3>
                                     <p class="mt-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet
                                         distinctio eius error iure nesciunt, non ratione saepe suscipit ut voluptatum?
                                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. At, rem?</p>

@@ -20,7 +20,7 @@
                     <NavLink>Contact</NavLink>
                 </nav>
             </div>
-            <p class="mt-8 text-white">&copy; 2024 by AnyWear | <a href="#">Information légales</a>
+            <p class="mt-8 text-white">&copy; 2024 by AnyWear | <a :href="route('legal')">Information légales</a>
                 - <a href="#">RGPD</a></p>
         </div>
     </footer>
