@@ -16,6 +16,10 @@ Route::get('/', function () {
     ]);
 })->name('accueil');
 
+Route::get('/information-legales', function () {
+    return Inertia::render('InfoLegales');
+})->name('legal');
+
 Route::get('/dashboard', function () {
     // Récupérer les produits de l'utilisateur connecté
     $products = Product::where('user_id', auth()->id())->get();

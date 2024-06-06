@@ -6,6 +6,8 @@ import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+import Footer from "@/Layouts/Footer.vue";
 
 defineProps({
     canResetPassword: {
@@ -30,14 +32,15 @@ const submit = () => {
 </script>
 
 <template>
-    <GuestLayout>
+    <AuthenticatedLayout>
+    <GuestLayout class="my-16 mx-auto w-10/12 ">
         <Head title="Inscription" ><title>Connexion</title></Head>
 
         <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
             {{ status }}
         </div>
 
-        <form @submit.prevent="submit">
+        <form class="" @submit.prevent="submit">
             <div>
                 <InputLabel for="email" value="Email" />
 
@@ -91,4 +94,6 @@ const submit = () => {
             </div>
         </form>
     </GuestLayout>
+        <Footer/>
+    </AuthenticatedLayout>
 </template>

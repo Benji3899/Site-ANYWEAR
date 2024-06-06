@@ -5,6 +5,8 @@ import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+import Footer from "@/Layouts/Footer.vue";
 
 const form = useForm({
     lastname: '',
@@ -23,8 +25,9 @@ const submit = () => {
 </script>
 
 <template>
-    <GuestLayout>
-        <Head title="Register" />
+    <AuthenticatedLayout>
+    <GuestLayout class="my-16 mx-auto w-10/12">
+        <Head><title>Inscription</title></Head>
 
         <form @submit.prevent="submit">
             <div>
@@ -133,4 +136,6 @@ const submit = () => {
             </div>
         </form>
     </GuestLayout>
+    <Footer/>
+    </AuthenticatedLayout>
 </template>
