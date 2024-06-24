@@ -28,8 +28,8 @@ class StoreProductRequest extends FormRequest
             'price' => 'nullable|numeric',
             'size' => 'nullable|string|max:255',
             'brand' => 'required|string',
-            'first_img' => 'required|file|mimes:jpeg,jpg,png',
-            'second_img' => 'required|file|mimes:jpeg,jpg,png',
+            'first_img' => 'sometimes|image|mimes:jpeg,jpg,png',
+            'second_img' => 'sometimes|image|mimes:jpeg,jpg,png',
             'type' => ['required', 'string', Rule::in(['rental', 'swap'])],
             'category' => ['required', 'string', Rule::in(['sac', 'robe', 'pantalon', 'smoking', 'jupe'])],
         ];

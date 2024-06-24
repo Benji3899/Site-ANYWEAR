@@ -99,37 +99,46 @@ class ProductController extends Controller
      */
     public function update(StoreProductRequest $request, int $id)
     {
+//        dd($request->all());
+
         $product = Product::findOrFail($id);
         // Vérifie les permissions
         $this->authorize('update', $product);
 
-//        $validated = $request->validate([
-//            'name' => 'required',
-//            'description' => 'required',
-//            'price' => null,
-//            'size' => null,
-//            'brand' => 'required',
-//            'type' => 'required',
-//            'category' => 'required',
-//        ]);
-
+        // Récupération des données validées
         $validated = $request->validated();
 
-        // Mise à jour des fichiers d'images si nécessaires
+        /*** nouveau code ***/
         if ($request->hasFile('first_img')) {
             $firstImage = $request->file('first_img');
             $pathFirstImage = $firstImage->store('', 'products');
-            $firstImageFileName = basename($pathFirstImage);
-            $product->first_img = $firstImageFileName;
+            $validated['first_img'] = basename($pathFirstImage);
         }
 
         if ($request->hasFile('second_img')) {
             $secondImage = $request->file('second_img');
             $pathSecondImage = $secondImage->store('', 'products');
-            $secondImageFileName = basename($pathSecondImage);
-            $product->second_img = $secondImageFileName;
+            $validated['second_img'] = basename($pathSecondImage);
         }
+        /*** nouveau code ***/
 
+
+        /*** ancien code ***/
+        // Mise à jour des fichiers d'images si nécessaires
+//        if ($request->hasFile('first_img')) {
+//            $firstImage = $request->file('first_img');
+//            $pathFirstImage = $firstImage->store('', 'products');
+//            $firstImageFileName = basename($pathFirstImage);
+//            $product->first_img = $firstImageFileName;
+//        }
+//
+//        if ($request->hasFile('second_img')) {
+//            $secondImage = $request->file('second_img');
+//            $pathSecondImage = $secondImage->store('', 'products');
+//            $secondImageFileName = basename($pathSecondImage);
+//            $product->second_img = $secondImageFileName;
+//        }
+        /*** ancien code ***/
 //        dd($validated, $product->first_img, $product->second_img, $product->save());
 
         // Mise à jour du produit avec les données validées

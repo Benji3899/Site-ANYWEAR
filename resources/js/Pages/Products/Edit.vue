@@ -2,7 +2,7 @@
 
     <AuthenticatedLayout>
         <!-- @submit.prevent pour annuler le comportement par défaut du formulaire -->
-        <form @submit.prevent="onSubmitForm">
+        <form @submit.prevent="onSubmitForm" method="post" enctype="multipart/form-data">
             <p>Modifier le produit</p>
             <p>Nom: <input type="text" required v-model="form.name" /></p>
             <p>Description: <input type="text" required v-model="form.description" /></p>
@@ -28,18 +28,28 @@
             </p>
             <button type="submit">Modifier le produit</button>
         </form>
+
+        <!-- Affichage des erreurs de validation -->
+        <!-- v-if="errors.length" pour afficher les erreurs seulement s'il y en a -->
+        <div v-if="errors.length">
+            <p>Il y a des erreurs dans votre formulaire :</p>
+            <ul>
+                <li v-for="error in errors" :key="error">{{ error }}</li>
+            </ul>
+        </div>
     </AuthenticatedLayout>
 </template>
 
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { reactive } from "vue";
-import { router } from "@inertiajs/vue3";
-import { usePage } from "@inertiajs/vue3";
+import {reactive, ref} from "vue";
+import { router, usePage } from "@inertiajs/vue3";
+import axios from "axios";
 
 // Récupération des données du produit depuis la page Inertia
 const { props } = usePage();
 const product = props.product;
+
 
 // Initialisation du formulaire réactif avec les valeurs du produit
 const form = reactive({
@@ -56,6 +66,8 @@ const form = reactive({
     category: product.category,
 });
 
+const errors = ref([]);
+
 /***** test ******/
 // Fonction pour gérer le changement d'image
 function onFirstImageChanged(event) {
@@ -66,8 +78,9 @@ function onSecondImageChanged(event) {
     form.second_img = event.target.files[0];
 }
 /***** test ******/
+
 // Fonction pour soumettre le formulaire
-function onSubmitForm() {
+async function onSubmitForm() {
     const formData = new FormData();
     formData.append('name', form.name);
     formData.append('description', form.description);
@@ -84,13 +97,32 @@ function onSubmitForm() {
         formData.append('second_img', form.second_img);
     }
 
-    console.log(...formData); // Pour vérifier les données envoyées
+    // console.log(...formData); // Pour vérifier les données envoyées
 
-    router.patch(`/products/${product.id}`, formData, {
-        headers: {
-            "Content-Type": "multipart/form-data",
-        },
-    });
+    try {
+        const response = await axios.patch(`/products/${product.id}`, formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            },
+        });
+        console.log('Form submitted successfully', response.data);
+        router.visit('/dashboard');
+    } catch (error) {
+        console.error('Error submitting form', error);
+        if (error.response && error.response.status === 422) {
+            errors.value = Object.values(error.response.data.errors).flat();
+        } else {
+            errors.value = ['Une erreur inconnue est survenue.'];
+        }
+    }
+
+    // router.patch(`/products/${product.id}`, formData, {
+    //     headers: {
+    //         "Content-Type": "multipart/form-data",
+    //     },
+    // });
+}
 
 // Fonction pour soumettre le formulaire
 // function onSubmitForm() {
@@ -101,7 +133,6 @@ function onSubmitForm() {
 //             "Content-Type": "multipart/form-data",
 //         },
 //     });
-}
 
 </script>
 
