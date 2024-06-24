@@ -97,9 +97,35 @@ const form = reactive({
 })
 
 // Fonction pour soumettre le formulaire
-function onSubmitForm() {
-    router.post('/products', form);
+// function onSubmitForm() {
+//     router.post('/products', form);
+// }
+async function onSubmitForm() {
+    const formData = new FormData();
+    formData.append('name', form.name);
+    formData.append('description', form.description);
+    formData.append('price', form.price);
+    formData.append('size', form.size);
+    formData.append('brand', form.brand);
+    formData.append('first_img', form.first_img);
+    formData.append('second_img', form.second_img);
+    formData.append('type', form.type);
+    formData.append('category', form.category);
+
+    try {
+        const response = await axios.post('/products', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            },
+        });
+        console.log('Form submitted successfully', response.data);
+        router.visit('/dashboard');
+    } catch (error) {
+        console.error('Error submitting form', error);
+    }
 }
+
 
 // Fonction pour gérer le changement de la première image
 function onFirstImageChanged(event) {
