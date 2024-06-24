@@ -2,14 +2,16 @@
 
     <AuthenticatedLayout>
         <!-- @submit.prevent pour annuler le comportement par défaut du formulaire -->
-        <form @submit.prevent="onSubmitForm" method="post" enctype="multipart/form-data">
+        <form @submit.prevent="onSubmitForm">
             <p>Modifier le produit</p>
             <p>Nom: <input type="text" required v-model="form.name" /></p>
             <p>Description: <input type="text" required v-model="form.description" /></p>
             <p>Prix: <input type="number" v-model="form.price" /></p>
             <p>Taille: <input type="text" v-model="form.size" /></p>
             <p>Marque: <input type="text" required v-model="form.brand" /></p>
+            <p v-if="product.first_img">Image 1 actuelle: <img :src="'/storage/products/' + product.first_img" style="max-width: 200px;"  alt=""/></p>
             <p>Image 1: <input type="file" accept="image/jpeg, image/png" @change="onFirstImageChanged" /></p>
+            <p v-if="product.second_img">Image 2 actuelle: <img :src="'/storage/products/' + product.second_img" style="max-width: 200px;"  alt=""/></p>
             <p>Image 2: <input type="file" accept="image/jpeg, image/png" @change="onSecondImageChanged" /></p>
             <p>Type:
                 <select v-model="form.type" required>
@@ -37,6 +39,7 @@
                 <li v-for="error in errors" :key="error">{{ error }}</li>
             </ul>
         </div>
+
     </AuthenticatedLayout>
 </template>
 
@@ -68,16 +71,7 @@ const form = reactive({
 
 const errors = ref([]);
 
-/***** test ******/
-// Fonction pour gérer le changement d'image
-function onFirstImageChanged(event) {
-    form.first_img = event.target.files[0];
-}
 
-function onSecondImageChanged(event) {
-    form.second_img = event.target.files[0];
-}
-/***** test ******/
 
 // Fonction pour soumettre le formulaire
 async function onSubmitForm() {
@@ -116,23 +110,17 @@ async function onSubmitForm() {
             errors.value = ['Une erreur inconnue est survenue.'];
         }
     }
-
-    // router.patch(`/products/${product.id}`, formData, {
-    //     headers: {
-    //         "Content-Type": "multipart/form-data",
-    //     },
-    // });
 }
 
-// Fonction pour soumettre le formulaire
-// function onSubmitForm() {
-//     console.log(form);
-//     console.log(product);
-//     router.patch(`/products/${product.id}`, form, {
-//         headers: {
-//             "Content-Type": "multipart/form-data",
-//         },
-//     });
+// Fonction pour gérer le changement d'image
+function onFirstImageChanged(event) {
+    form.first_img = event.target.files[0];
+}
+
+function onSecondImageChanged(event) {
+    form.second_img = event.target.files[0];
+}
+
 
 </script>
 

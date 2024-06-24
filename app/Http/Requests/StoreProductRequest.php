@@ -28,10 +28,20 @@ class StoreProductRequest extends FormRequest
             'price' => 'nullable|numeric',
             'size' => 'nullable|string|max:255',
             'brand' => 'required|string',
-            'first_img' => 'sometimes|image|mimes:jpeg,jpg,png',
-            'second_img' => 'sometimes|image|mimes:jpeg,jpg,png',
+            'first_img' => 'nullable|image|mimes:jpeg,jpg,png',
+            'second_img' => 'nullable|image|mimes:jpeg,jpg,png',
             'type' => ['required', 'string', Rule::in(['rental', 'swap'])],
             'category' => ['required', 'string', Rule::in(['sac', 'robe', 'pantalon', 'smoking', 'jupe'])],
         ];
+
+        /*** test ***/
+        // Ajouter les règles pour les images uniquement lors de la création
+//        if ($this->isMethod('patch')) {
+//            $rules['first_img'] = 'nullable|image|mimes:jpeg,jpg,png';
+//            $rules['second_img'] = 'nullable|image|mimes:jpeg,jpg,png';
+//        }
+//
+//        return $rules;
+        /*** test ***/
     }
 }

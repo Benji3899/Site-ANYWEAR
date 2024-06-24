@@ -15,11 +15,14 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('description');
+            $table->integer('price')->nullable();
             $table->string('size')->nullable();
             $table->string('brand');
             $table->string('first_img');
             $table->string('second_img');
             $table->enum('type', ['rental', 'swap']);
+            $table->enum('category', ['sac', 'robe', 'pantalon', 'smoking', 'jupe']);
+            $table->string('status')->default('available');
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('validated_by')->nullable()->constrained('users');
             $table->timestamps();
