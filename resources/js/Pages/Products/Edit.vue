@@ -1,58 +1,88 @@
 <template>
-
+    <Head :title="`Éditer votre produit ${form.name}`" ><title>Modifier votre produit</title></Head>
     <AuthenticatedLayout>
-        <!-- @submit.prevent pour annuler le comportement par défaut du formulaire -->
-        <form @submit.prevent="onSubmitForm">
-            <p>Modifier le produit</p>
-            <p>Nom: <input type="text" required v-model="form.name" /></p>
-            <p>Description: <input type="text" required v-model="form.description" /></p>
-            <p>Prix: <input type="number" v-model="form.price" /></p>
-            <p>Taille: <input type="text" v-model="form.size" /></p>
-            <p>Marque: <input type="text" required v-model="form.brand" /></p>
-            <p v-if="product.first_img">Image 1 actuelle: <img :src="'/storage/products/' + product.first_img" style="max-width: 200px;"  alt=""/></p>
-            <p>Image 1: <input type="file" accept="image/jpeg, image/png" @change="onFirstImageChanged" /></p>
-            <p v-if="product.second_img">Image 2 actuelle: <img :src="'/storage/products/' + product.second_img" style="max-width: 200px;"  alt=""/></p>
-            <p>Image 2: <input type="file" accept="image/jpeg, image/png" @change="onSecondImageChanged" /></p>
-            <p>Type:
-                <select v-model="form.type" required>
-                    <option value="rental">Location</option>
-                    <option value="swap">Troque</option>
-                </select>
-            </p>
-            <p>Catégorie:
-                <select v-model="form.category" required>
-                    <option value="sac">Sac</option>
-                    <option value="robe">Robe</option>
-                    <option value="pantalon">Pantalon</option>
-                    <option value="smoking">Smoking</option>
-                    <option value="jupe">Jupe</option>
-                </select>
-            </p>
-            <button type="submit">Modifier le produit</button>
-        </form>
-
-        <!-- Affichage des erreurs de validation -->
-        <!-- v-if="errors.length" pour afficher les erreurs seulement s'il y en a -->
-        <div v-if="errors.length">
-            <p>Il y a des erreurs dans votre formulaire :</p>
-            <ul>
-                <li v-for="error in errors" :key="error">{{ error }}</li>
-            </ul>
+        <div class="py-12">
+            <h2 class="font-semibold text-lg mb-6 text-center">Éditer votre produit {{ product.name }}</h2>
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <!-- @submit.prevent pour annuler le comportement par défaut du formulaire -->
+                <form @submit.prevent="onSubmitForm" class="max-w-lg mx-auto">
+                    <div class="grid grid-cols-1 gap-6">
+                        <label for="name" class="block">
+                            <span>Nom</span>
+                            <input type="text" required v-model="form.name"
+                                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:ring-opacity-50">
+                        </label>
+                        <label for="size" class="block">
+                            <span>Taille</span>
+                            <input type="text" v-model="form.size"
+                                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:ring-opacity-50">
+                        </label>
+                        <label for="description" class="block">
+                            <span>Description</span>
+                            <input type="text" required v-model="form.description"
+                                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:ring-opacity-50">
+                        </label>
+                        <label for="price" class="block">
+                            <span>Prix</span>
+                            <input type="number" v-model="form.price"
+                                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:ring-opacity-50">
+                        </label>
+                        <label for="brand" class="block">
+                            <span>Marque</span>
+                            <input type="text" required v-model="form.brand"
+                                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:ring-opacity-50">
+                        </label>
+                        <label for="image_1" class="block">
+                            <span>Image 1</span>
+                            <input type="file" accept="image/jpeg, image/png" @change="onFirstImageChanged"
+                                   class="mt-1 block w-full border-gray-300 focus:ring-blue-500 focus:ring-opacity-50">
+                        </label>
+                        <label for="image_2" class="block">
+                            <span>Image 2</span>
+                            <input type="file" accept="image/jpeg, image/png" @change="onSecondImageChanged"
+                                   class="mt-1 block w-full border-gray-300 focus:ring-blue-500 focus:ring-opacity-50">
+                        </label>
+                        <label for="type" class="block">
+                            <span>Type</span>
+                            <select name="" id="" v-model="form.type" required
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:ring-opacity-50">
+                                <option value="rental">Location</option>
+                                <option value="swap">Troque</option>
+                            </select>
+                        </label>
+                        <label for="category" class="block">
+                            <span>Catégorie</span>
+                            <select name="" id="" v-model="form.category" required
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:ring-opacity-50">
+                                <option value="sac">Sac</option>
+                                <option value="robe">Robe</option>
+                                <option value="pantalon">Pantalon</option>
+                                <option value="smoking">Smoking</option>
+                                <option value="jupe">Jupe</option>
+                            </select>
+                        </label>
+                        <div class="mt-8 flex justify-center">
+                            <button type="submit"
+                                    class="px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white font-semibold rounded-md">
+                                Modifier le produit
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
-
     </AuthenticatedLayout>
 </template>
 
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import {reactive, ref} from "vue";
-import { router, usePage } from "@inertiajs/vue3";
+import {router, usePage} from "@inertiajs/vue3";
 import axios from "axios";
 
 // Récupération des données du produit depuis la page Inertia
-const { props } = usePage();
-const product = props.product;
-
+const {product} = usePage().props;
+const errors = ref([]);
 
 // Initialisation du formulaire réactif avec les valeurs du produit
 const form = reactive({
@@ -61,19 +91,14 @@ const form = reactive({
     price: product.price,
     size: product.size,
     brand: product.brand,
-    // first_img: product.first_img,
-    // second_img: product.second_img,
     first_img: null,
     second_img: null,
     type: product.type,
     category: product.category,
 });
 
-const errors = ref([]);
 
-
-
-// Fonction pour soumettre le formulaire
+/*** Fonction pour soumettre le formulaire ***/
 async function onSubmitForm() {
     const formData = new FormData();
     formData.append('name', form.name);
@@ -83,7 +108,6 @@ async function onSubmitForm() {
     formData.append('brand', form.brand);
     formData.append('type', form.type);
     formData.append('category', form.category);
-
     if (form.first_img) {
         formData.append('first_img', form.first_img);
     }
@@ -91,26 +115,29 @@ async function onSubmitForm() {
         formData.append('second_img', form.second_img);
     }
 
+    // Debug: Log formData content
+    for (let pair of formData.entries()) {
+        console.log(pair[0]+ ', ' + pair[1]);
+    }
     // console.log(...formData); // Pour vérifier les données envoyées
 
     try {
-        const response = await axios.patch(`/products/${product.id}`, formData, {
+        await axios.patch(`/products/${product.id}`, formData, {
             headers: {
-                "Content-Type": "multipart/form-data",
+                'Content-Type': 'multipart/form-data',
                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
             },
         });
-        console.log('Form submitted successfully', response.data);
-        router.visit('/dashboard');
+        router.visit(`/dashboard`);
     } catch (error) {
-        console.error('Error submitting form', error);
         if (error.response && error.response.status === 422) {
             errors.value = Object.values(error.response.data.errors).flat();
         } else {
-            errors.value = ['Une erreur inconnue est survenue.'];
+            console.error('Error submitting form', error);
         }
     }
 }
+/*** FIN fonction pour soumettre le formulaire ***/
 
 // Fonction pour gérer le changement d'image
 function onFirstImageChanged(event) {

@@ -71,7 +71,7 @@
                         </label>
                     </div>
                     <div class="mt-8 flex justify-center">
-                    <button type="submit" class="px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white font-semibold rounded-md">Ajouter le produit</button>
+                        <button type="submit" class="px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white font-semibold rounded-md">Ajouter le produit</button>
                     </div>
                 </form>
             </div>

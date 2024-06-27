@@ -8,6 +8,9 @@
                 <p>Prix: {{ product.price }}</p>
                 <p>Taille: {{ product.size }}</p>
                 <p>Marque: {{ product.brand }}</p>
+                <p>Image 1: <img :src="`storage/products/${product.first_img}`" alt="Image 1"></p>
+                <p>Image 2: <img :src="`storage/products/${product.second_img}`" alt="Image 2"></p>
+
                 <!-- Afficher d'autres détails du produit ici -->
             </div>
         </div>
