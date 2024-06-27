@@ -5,9 +5,9 @@ import { InertiaLink } from '@inertiajs/inertia-vue3';
 
 
 const { props } = usePage();
-console.log('Props:', props);
+// console.log('Props:', props);
 const products = props.products || [];
-console.log('Products:', products);
+// console.log('Products:', products);
 </script>
 
 <template>
@@ -22,7 +22,9 @@ console.log('Products:', products);
                         <h2 class="font-semibold text-lg mb-6 text-center">Mes Produits</h2>
                         <ul v-if="products && products.length" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12">
                             <li v-for="product in products" :key="product.id" class="bg-white shadow-md rounded-lg overflow-hidden">
-                                <img :src="`storage/products/${product.first_img}`" alt="Image 1" class="w-full h-auto">
+                                <InertiaLink :href="`/products/${product.id}`">
+                                    <img :src="`/storage/products/${product.first_img}`" alt="Image 1" class="w-full h-auto cursor-pointer">
+                                </InertiaLink>
                                 <h4 class="text-center m-6">{{ product.name }}</h4>
                                 <div class="flex justify-center space-x-4 mb-4">
                                     <a :href="`/products/${product.id}/edit`" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Modifier</a>
